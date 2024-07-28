@@ -170,10 +170,10 @@ public class DefaultAppBootstrapper implements ApplicationListener<ContextRefres
     private App createApp() {
         App app = App.create();
         app.setReauthenticationEnabled(false);
-        app.setSponsorName("Sage Bionetworks");
-        app.setConsentNotificationEmail("bridge-testing+consent@sagebase.org");
-        app.setTechnicalEmail("bridge-testing+technical@sagebase.org");
-        app.setSupportEmail("bridge-testing+support@sagebase.org");
+        app.setSponsorName("Biaffect");
+        app.setConsentNotificationEmail("biaffect-bridge-ops@googlegroups.com");
+        app.setTechnicalEmail("biaffect-bridge-ops@googlegroups.com");
+        app.setSupportEmail("biaffect-bridge-ops@googlegroups.com");
         app.setPasswordPolicy(new PasswordPolicy(2, false, false, false, false));
         app.setEmailVerificationEnabled(true);
         app.setVerifyChannelOnSignInEnabled(true);
