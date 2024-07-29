@@ -284,6 +284,12 @@
             <artifactId>BridgeTestUtils</artifactId>
             <version>1.5</version>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.sagebionetworks</groupId>
+                    <artifactId>synapseJavaClient</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
