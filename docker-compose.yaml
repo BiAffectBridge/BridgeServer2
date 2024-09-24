@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: mysql
+    environment:
+      MYSQL_DATABASE: bridgeserverdb
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_USER: bridgeserver
+      MYSQL_PASSWORD: bridgeserverpassword
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./my.cnf:/etc/mysql/conf.d/my.cnf   # Mount custom my.cnf file
+    networks:
+      - bridge-network
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: bridgeserver
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/bridgeserverdb
+      SPRING_DATASOURCE_USERNAME: bridgeserver
+      SPRING_DATASOURCE_PASSWORD: bridgeserverpassword
+      SPRING_PROFILES_ACTIVE: noinit
+    ports:
+      - "8087:9000"
+    depends_on:
+      - db
+    networks:
+      - bridge-network
+    command: >
+      /wait-for-it.sh db:3306 --timeout=60 --strict -- 
+      mvn spring-boot:run -Dspring-boot.run.profiles=noinit
+
+volumes:
+  mysql_data:
+
+networks:
+  bridge-network:
+    driver: bridge
