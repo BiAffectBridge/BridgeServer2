@@ -33,9 +33,9 @@ services:
       - db
     networks:
       - bridge-network
-    command: >
-      /wait-for-it.sh db:3306 --timeout=60 --strict -- 
-      mvn spring-boot:run -Dspring-boot.run.profiles=noinit
+    # command: >
+    #   /wait-for-it.sh db:3306 --timeout=60 --strict -- 
+    #   mvn spring-boot:run -Dspring-boot.run.profiles=noinit
 
 volumes:
   mysql_data:
